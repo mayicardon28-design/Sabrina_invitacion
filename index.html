@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Sabrina - Mis 15</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background: linear-gradient(to bottom, #cceeff, #e6f7ff);
+  color: #003366;
+  text-align: center;
+  overflow-x: hidden;
+}
+
+/* PORTADA */
+.portada {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+h1 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 80px;
+  margin: 0;
+}
+
+.btn {
+  background: #66ccff;
+  border: none;
+  padding: 15px 30px;
+  color: white;
+  font-size: 18px;
+  border-radius: 30px;
+  margin-top: 20px;
+}
+
+/* SECCIONES */
+.seccion {
+  padding: 60px 20px;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: 1s;
+}
+
+.mostrar {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* CONTADOR */
+#countdown {
+  font-size: 30px;
+  margin-top: 20px;
+}
+
+/* MARIPOSAS */
+.butterfly {
+  position: fixed;
+  width: 40px;
+  animation: volar linear infinite;
+}
+
+@keyframes volar {
+  0% { transform: translateY(100vh) translateX(0); }
+  100% { transform: translateY(-10vh) translateX(150px); }
+}
+</style>
+</head>
+
+<body>
+
+<!-- MARIPOSAS -->
+<img src="https://i.imgur.com/QZ7pF6P.png" class="butterfly" style="left:10%; animation-duration:10s;">
+<img src="https://i.imgur.com/QZ7pF6P.png" class="butterfly" style="left:40%; animation-duration:12s;">
+<img src="https://i.imgur.com/QZ7pF6P.png" class="butterfly" style="left:70%; animation-duration:14s;">
+
+<!-- PORTADA -->
+<section class="portada">
+  <h1>Sabrina</h1>
+  <p>Mis 15 años 🦋</p>
+  <button class="btn" onclick="abrir()">Abrir invitación</button>
+</section>
+
+<!-- FRASE -->
+<section class="seccion">
+  <p>Hay momentos inolvidables que se atesoran en el corazón 💙</p>
+</section>
+
+<!-- INFO -->
+<section class="seccion">
+  <h2>Te invito a mi fiesta</h2>
+  <p>📅 2 de mayo</p>
+  <p>⏰ 21:00 hs</p>
+  <p>📍 Salón a confirmar</p>
+</section>
+
+<!-- CONTADOR -->
+<section class="seccion">
+  <h2>Faltan...</h2>
+  <div id="countdown"></div>
+</section>
+
+<!-- CONFIRMAR -->
+<section class="seccion">
+  <a href="https://wa.me/549XXXXXXXXXX">
+    <button class="btn">Confirmar asistencia</button>
+  </a>
+</section>
+
+<!-- MÚSICA -->
+<audio id="musica" src="only.mp3"></audio>
+
+<script>
+function abrir() {
+  document.getElementById("musica").play();
+  mostrarSecciones();
+  iniciarContador();
+}
+
+function mostrarSecciones() {
+  const secciones = document.querySelectorAll(".seccion");
+  let i = 0;
+  const intervalo = setInterval(() => {
+    if (i < secciones.length) {
+      secciones[i].classList.add("mostrar");
+      i++;
+    } else {
+      clearInterval(intervalo);
+    }
+  }, 400);
+}
+
+function iniciarContador() {
+  const fecha = new Date("May 2, 2026 21:00:00").getTime();
+
+  setInterval(() => {
+    const ahora = new Date().getTime();
+    const distancia = fecha - ahora;
+
+    const dias = Math.floor(distancia / (1000*60*60*24));
+    const horas = Math.floor((distancia % (1000*60*60*24))/(1000*60*60));
+    const minutos = Math.floor((distancia % (1000*60*60))/(1000*60));
+
+    document.getElementById("countdown").innerHTML =
+      dias + " días " + horas + " hs " + minutos + " min 🦋";
+  }, 1000);
+}
+</script>
+
+</body>
+</html>
